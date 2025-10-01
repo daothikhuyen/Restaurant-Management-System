@@ -3,9 +3,6 @@ target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-src/main/java/RMS/com/example/RMS/common/
-src/main/java/RMS/com/example/RMS/config/
-src/main/java/RMS/com/example/RMS/customer/
 src/main/java/RMS/com/example/RMS/table_management/
 
 ### STS ###
