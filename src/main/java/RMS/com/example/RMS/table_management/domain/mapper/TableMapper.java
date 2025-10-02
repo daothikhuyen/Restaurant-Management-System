@@ -1,5 +1,6 @@
-package RMS.com.example.RMS.table_management.domain;
+package RMS.com.example.RMS.table_management.domain.mapper;
 
+import RMS.com.example.RMS.table_management.domain.model.TableEntity;
 import RMS.com.example.RMS.table_management.web.request.TableRequest;
 import RMS.com.example.RMS.table_management.web.response.TableResponse;
 import org.mapstruct.Mapper;

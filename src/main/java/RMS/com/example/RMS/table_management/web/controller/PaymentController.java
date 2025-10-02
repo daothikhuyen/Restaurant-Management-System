@@ -1,27 +1,26 @@
 package RMS.com.example.RMS.table_management.web.controller;
 
-
 import RMS.com.example.RMS.common.ApiResponse;
-import RMS.com.example.RMS.table_management.domain.service.TableService;
-import RMS.com.example.RMS.table_management.web.request.TableRequest;
+import RMS.com.example.RMS.table_management.domain.service.PaymentService;
+import RMS.com.example.RMS.table_management.web.request.PaymentRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/admin/table_management")
+@RequestMapping("api/admin/payment")
 @CrossOrigin
 @Slf4j
-public class TableController {
+public class PaymentController {
 
     @Autowired
-    TableService service;
+    PaymentService service;
 
     @PostMapping("/create")
-    public ApiResponse<String> createTable(@RequestBody TableRequest request){
+    public ApiResponse<String> createPayment(@RequestBody PaymentRequest request){
 
         return ApiResponse.<String>builder()
-                .message(service.createTable(request))
+                .message(service.createPayment(request))
                 .build();
     }
 }

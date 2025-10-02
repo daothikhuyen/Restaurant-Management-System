@@ -1,4 +1,4 @@
-package RMS.com.example.RMS.table_management.domain;
+package RMS.com.example.RMS.table_management.domain.model;
 
 public enum TableStatus {
     AVAILABLE,

@@ -1,7 +1,11 @@
-package RMS.com.example.RMS.table_management.domain;
+package RMS.com.example.RMS.table_management.domain.service;
 
 import RMS.com.example.RMS.common.expection.AppException;
 import RMS.com.example.RMS.common.expection.ErrorCode;
+import RMS.com.example.RMS.table_management.domain.mapper.TableMapper;
+import RMS.com.example.RMS.table_management.domain.model.TableEntity;
+import RMS.com.example.RMS.table_management.domain.model.TableStatus;
+import RMS.com.example.RMS.table_management.domain.repository.TableRepository;
 import RMS.com.example.RMS.table_management.web.request.TableRequest;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -36,9 +40,9 @@ public class TableService {
 
             tableRepository.save(table);
 
-            return "Lưu dữ liệu thành công";
+            return "Data saved successfully";
         }catch (DataAccessException e){
-            throw new AppException(ErrorCode.DATA_EXISTED);
+            throw new AppException(ErrorCode.DATABASE_ERROR);
         }catch (Exception e){
             throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
         }

@@ -1,4 +1,4 @@
-package RMS.com.example.RMS.table_management.domain;
+package RMS.com.example.RMS.menu.domain.model;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,19 +11,21 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name="restaurant_table")
-public class TableEntity {
+@Table(name="product")
+public class ProductEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
-    private int capacity;
-    @Enumerated(EnumType.ORDINAL)
-    @Column(nullable = false)
-    private TableStatus status;
+
+    private Long categoryId;
     private String name;
-    private String area;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String description;
+    private double price;
+    private double pricePromotion;
+    private String imageUrl;
     private boolean isDeleted = false;
     private String createdBy;
     private String updatedBy;
