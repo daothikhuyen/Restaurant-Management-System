@@ -19,14 +19,6 @@ public class ProductController {
     @Autowired
     ProductService service;
 
-    @PostMapping("create")
-    public ApiResponse<String> createProduct(@RequestBody ProductRequest request) throws Exception {
-
-        return ApiResponse.<String>builder()
-                .result(service.createProduct(request))
-                .build();
-    }
-
     @GetMapping("/category/{categoryId}")
     public ApiResponse<List<ProductResponse>> getAll(@PathVariable Long categoryId) throws Exception {
 
@@ -35,11 +27,35 @@ public class ProductController {
                 .build();
     }
 
-    @GetMapping("{productId}")
-    public ApiResponse<ProductResponse> createProduct(@PathVariable Long productId) throws Exception {
+    @GetMapping("/{productId}")
+    public ApiResponse<ProductResponse> getProductById(@PathVariable Long productId) throws Exception {
 
         return ApiResponse.<ProductResponse>builder()
                 .result(service.getProductById(productId))
+                .build();
+    }
+
+    @PostMapping("/create")
+    public ApiResponse<String> createProduct(@RequestBody ProductRequest request) throws Exception {
+
+        return ApiResponse.<String>builder()
+                .result(service.createProduct(request))
+                .build();
+    }
+
+    @PostMapping("/update/{productId}")
+    public ApiResponse<ProductResponse> updateProduct(@PathVariable Long productId, @RequestBody ProductRequest request) throws Exception {
+
+        return ApiResponse.<ProductResponse>builder()
+                .result(service.updateProduct(productId, request))
+                .build();
+    }
+
+    @PostMapping("/delete/{productId}")
+    public ApiResponse<String> deleteProduct(@PathVariable Long productId) throws Exception {
+
+        return ApiResponse.<String>builder()
+                .message(service.deleteProduct(productId))
                 .build();
     }
 }

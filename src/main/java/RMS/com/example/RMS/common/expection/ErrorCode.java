@@ -22,7 +22,8 @@ public enum ErrorCode {
     INVALID_TOKEN(1012, "Invalid token format", HttpStatus.BAD_REQUEST),
     DATA_EXISTED(1013, "Data already exists", HttpStatus.CONFLICT),
     DATABASE_ERROR(1014, "Cannot save record", HttpStatus.INTERNAL_SERVER_ERROR),
-    DATA_NOT_FOUND(1015,"No data found",HttpStatus.NOT_FOUND  );
+    DATA_NOT_FOUND(1015,"No data found",HttpStatus.NOT_FOUND  ),
+    INVALID_INPUT(1016,"Invalid Status:" ,HttpStatus.BAD_REQUEST );
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {
         this.code = code;

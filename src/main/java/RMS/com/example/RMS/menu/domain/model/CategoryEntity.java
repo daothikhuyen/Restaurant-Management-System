@@ -16,4 +16,5 @@ public class CategoryEntity {
     private Long id;
     private String name;
     private String iconUrl;
+    private boolean isDeleted = false;
 }

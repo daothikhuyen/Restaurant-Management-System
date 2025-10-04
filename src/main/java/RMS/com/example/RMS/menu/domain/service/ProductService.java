@@ -2,6 +2,7 @@ package RMS.com.example.RMS.menu.domain.service;
 
 import RMS.com.example.RMS.common.expection.AppException;
 import RMS.com.example.RMS.common.expection.ErrorCode;
+import RMS.com.example.RMS.customer.domain.CustomerEntity;
 import RMS.com.example.RMS.menu.domain.model.ProductEntity;
 import RMS.com.example.RMS.menu.domain.repository.ProductRepository;
 import RMS.com.example.RMS.menu.mapper.ProductMapper;
@@ -39,7 +40,6 @@ public class ProductService {
             productRepository.save(product);
             return "Data creation successful";
         }catch (DataAccessException e){
-            log.error("Database error when saving product", e);
             throw new AppException(ErrorCode.DATABASE_ERROR);
         }catch (Exception e){
             throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
@@ -67,7 +67,6 @@ public class ProductService {
     public ProductResponse getProductById(Long productId) {
 
         try {
-
             Optional<ProductEntity> product = productRepository.findById(productId);
 
             if (product.isPresent()) {
@@ -81,5 +80,46 @@ public class ProductService {
         }catch (Exception e){
             throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
         }
+    }
+
+    public ProductResponse updateProduct(Long productId, ProductRequest request) {
+        ProductEntity product = productRepository.findById(productId)
+                .orElseThrow(() -> new AppException(ErrorCode.DATA_NOT_FOUND));
+
+        try {
+            product.setCategoryId(request.getCategoryId());
+            product.setName(request.getName());
+            product.setDescription(request.getDescription());
+            product.setPrice(request.getPrice());
+            product.setPricePromotion(request.getPricePromotion());
+            product.setImageUrl(request.getImageUrl());
+            product.setUpdatedBy(request.getUpdatedBy());
+            product.setUpdatedDate(LocalDateTime.now());
+            product.setDescription(request.getDescription());
+            productRepository.save(product);
+
+            return productMapper.toProductResponse(product);
+        }catch (DataAccessException e){
+            throw new AppException(ErrorCode.DATABASE_ERROR);
+        }catch (Exception e){
+            throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
+        }
+    }
+
+    public String deleteProduct(Long productId){
+        ProductEntity product = productRepository.findById(productId)
+                .orElseThrow(() -> new AppException(ErrorCode.DATA_NOT_FOUND));
+
+        try {
+            product.setDeleted(true);
+            productRepository.save(product);
+
+            return "Data deletion successful";
+        }catch (DataAccessException e){
+            throw new AppException(ErrorCode.DATABASE_ERROR);
+        }catch (Exception e){
+            throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
+        }
+
     }
 }

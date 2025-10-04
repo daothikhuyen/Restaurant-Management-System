@@ -26,12 +26,27 @@ public class CategoryController {
                 .result(service.getAll())
                 .build();
     }
-
     @PostMapping("/create")
     public ApiResponse<String> createCategory(@RequestBody CategoryRequest request) throws Exception {
 
         return ApiResponse.<String>builder()
                 .result(service.createCategory(request))
+                .build();
+    }
+
+    @PostMapping("/update/{categoryId}")
+    public ApiResponse<CategoryResponse> updateCategory(@PathVariable Long categoryId, @RequestBody CategoryRequest request) throws Exception {
+
+        return ApiResponse.<CategoryResponse>builder()
+                .result(service.updateCategory(categoryId, request))
+                .build();
+    }
+
+    @PostMapping("/delete/{categoryId}")
+    public ApiResponse<String> deleteCategory(@PathVariable Long categoryId) throws Exception {
+
+        return ApiResponse.<String>builder()
+                .result(service.deleteCategory(categoryId))
                 .build();
     }
 }

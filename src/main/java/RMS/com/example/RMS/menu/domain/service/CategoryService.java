@@ -56,4 +56,37 @@ public class CategoryService {
             throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
         }
     }
+
+    public CategoryResponse updateCategory(Long categoryId, CategoryRequest request) {
+        CategoryEntity category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+
+        try {
+            category.setName(request.getName());
+            category.setIconUrl(request.getIconUrl());
+            categoryRepository.save(category);
+
+            return categoryMapper.toCategoryResponse(category);
+        }catch (DataAccessException e){
+            throw new AppException(ErrorCode.DATABASE_ERROR);
+        }catch (Exception e){
+            throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
+        }
+    }
+
+    public String deleteCategory(Long categoryId) {
+        CategoryEntity category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new AppException(ErrorCode.DATA_NOT_FOUND));
+
+        try {
+            category.setDeleted(true);
+            categoryRepository.save(category);
+
+            return "Data deletion successful";
+        }catch (DataAccessException e){
+            throw new AppException(ErrorCode.DATABASE_ERROR);
+        }catch (Exception e){
+            throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
+        }
+    }
 }
