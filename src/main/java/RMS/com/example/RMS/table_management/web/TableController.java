@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/admin/table_management")
+@RequestMapping("api/table_management")
 @CrossOrigin
 @Slf4j
 public class TableController {
